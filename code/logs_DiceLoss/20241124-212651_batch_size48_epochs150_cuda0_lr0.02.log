@@ -1,0 +1,216 @@
+Length of Training Data:244, Length of Testing Data:523
+start running at device: cuda:0
+Epoch [1/150], Loss: 1.5344
+Epoch [2/150], Loss: 1.5213
+Epoch [3/150], Loss: 1.5080
+Epoch [4/150], Loss: 1.4944
+Epoch [5/150], Loss: 1.4760
+Epoch [6/150], Loss: 1.4620
+Epoch [7/150], Loss: 1.4473
+Epoch [8/150], Loss: 1.4325
+Epoch [9/150], Loss: 1.4207
+Epoch [10/150], Loss: 1.4097
+Epoch9: Average Dice Score: 0.3353
+Epoch9: Average HD95: 85.3943
+Epoch9: Average ASSD: 26.6423
+Current Best Testing Info: Best Dice Score: 0.0000, with HD95 = 0 and ASSD = 0 at epoch 1
+Epoch [11/150], Loss: 1.4047
+Epoch [12/150], Loss: 1.3950
+Epoch [13/150], Loss: 1.3853
+Epoch [14/150], Loss: 1.3782
+Epoch [15/150], Loss: 1.3700
+Epoch [16/150], Loss: 1.3566
+Epoch [17/150], Loss: 1.3574
+Epoch [18/150], Loss: 1.3561
+Epoch [19/150], Loss: 1.3507
+Epoch [20/150], Loss: 1.3410
+Epoch19: Average Dice Score: 0.2535
+Epoch19: Average HD95: 83.1413
+Epoch19: Average ASSD: 27.6387
+Current Best Testing Info: Best Dice Score: 0.3353, with HD95 = 85.39433679224663 and ASSD = 26.642285248153353 at epoch 10
+Epoch [21/150], Loss: 1.3378
+Epoch [22/150], Loss: 1.3348
+Epoch [23/150], Loss: 1.3213
+Epoch [24/150], Loss: 1.3272
+Epoch [25/150], Loss: 1.3207
+Epoch [26/150], Loss: 1.3149
+Epoch [27/150], Loss: 1.3096
+Epoch [28/150], Loss: 1.3057
+Epoch [29/150], Loss: 1.3029
+Epoch [30/150], Loss: 1.2981
+Epoch29: Average Dice Score: 0.3156
+Epoch29: Average HD95: 80.4876
+Epoch29: Average ASSD: 23.7512
+Current Best Testing Info: Best Dice Score: 0.3353, with HD95 = 85.39433679224663 and ASSD = 26.642285248153353 at epoch 10
+Epoch [31/150], Loss: 1.2894
+Epoch [32/150], Loss: 1.2879
+Epoch [33/150], Loss: 1.2832
+Epoch [34/150], Loss: 1.2790
+Epoch [35/150], Loss: 1.2819
+Epoch [36/150], Loss: 1.2783
+Epoch [37/150], Loss: 1.2750
+Epoch [38/150], Loss: 1.2690
+Epoch [39/150], Loss: 1.2688
+Epoch [40/150], Loss: 1.2620
+Epoch39: Average Dice Score: 0.3337
+Epoch39: Average HD95: 76.9970
+Epoch39: Average ASSD: 21.6217
+Current Best Testing Info: Best Dice Score: 0.3353, with HD95 = 85.39433679224663 and ASSD = 26.642285248153353 at epoch 10
+Epoch [41/150], Loss: 1.2572
+Epoch [42/150], Loss: 1.2512
+Epoch [43/150], Loss: 1.2493
+Epoch [44/150], Loss: 1.2358
+Epoch [45/150], Loss: 1.2312
+Epoch [46/150], Loss: 1.2336
+Epoch [47/150], Loss: 1.2328
+Epoch [48/150], Loss: 1.2294
+Epoch [49/150], Loss: 1.2076
+Epoch [50/150], Loss: 1.2128
+Epoch49: Average Dice Score: 0.3355
+Epoch49: Average HD95: 75.6262
+Epoch49: Average ASSD: 20.4286
+Current Best Testing Info: Best Dice Score: 0.3353, with HD95 = 85.39433679224663 and ASSD = 26.642285248153353 at epoch 10
+Epoch [51/150], Loss: 1.2044
+Epoch [52/150], Loss: 1.1933
+Epoch [53/150], Loss: 1.1847
+Epoch [54/150], Loss: 1.1702
+Epoch [55/150], Loss: 1.1475
+Epoch [56/150], Loss: 1.1014
+Epoch [57/150], Loss: 1.0604
+Epoch [58/150], Loss: 1.0294
+Epoch [59/150], Loss: 1.0062
+Epoch [60/150], Loss: 0.9454
+Epoch59: Average Dice Score: 0.5736
+Epoch59: Average HD95: 52.2396
+Epoch59: Average ASSD: 8.6911
+Current Best Testing Info: Best Dice Score: 0.3355, with HD95 = 75.62615929514106 and ASSD = 20.42859921423609 at epoch 50
+Epoch [61/150], Loss: 0.9256
+Epoch [62/150], Loss: 0.9291
+Epoch [63/150], Loss: 0.9074
+Epoch [64/150], Loss: 0.9213
+Epoch [65/150], Loss: 0.9176
+Epoch [66/150], Loss: 0.9154
+Epoch [67/150], Loss: 0.8788
+Epoch [68/150], Loss: 0.8739
+Epoch [69/150], Loss: 0.8637
+Epoch [70/150], Loss: 0.8880
+Epoch69: Average Dice Score: 0.6635
+Epoch69: Average HD95: 46.9708
+Epoch69: Average ASSD: 6.6784
+Current Best Testing Info: Best Dice Score: 0.5736, with HD95 = 52.239554168421215 and ASSD = 8.691133496884914 at epoch 60
+Epoch [71/150], Loss: 0.8843
+Epoch [72/150], Loss: 0.8603
+Epoch [73/150], Loss: 0.8866
+Epoch [74/150], Loss: 0.8595
+Epoch [75/150], Loss: 0.8636
+Epoch [76/150], Loss: 0.8658
+Epoch [77/150], Loss: 0.8673
+Epoch [78/150], Loss: 0.8493
+Epoch [79/150], Loss: 0.8664
+Epoch [80/150], Loss: 0.8916
+Epoch79: Average Dice Score: 0.8258
+Epoch79: Average HD95: 12.2827
+Epoch79: Average ASSD: 2.1358
+Current Best Testing Info: Best Dice Score: 0.6635, with HD95 = 46.97077124874883 and ASSD = 6.67843710383066 at epoch 70
+Epoch [81/150], Loss: 0.8418
+Epoch [82/150], Loss: 0.8949
+Epoch [83/150], Loss: 0.8882
+Epoch [84/150], Loss: 0.8502
+Epoch [85/150], Loss: 0.8351
+Epoch [86/150], Loss: 0.8567
+Epoch [87/150], Loss: 0.8346
+Epoch [88/150], Loss: 0.8345
+Epoch [89/150], Loss: 0.8355
+Epoch [90/150], Loss: 0.8545
+Epoch89: Average Dice Score: 0.6092
+Epoch89: Average HD95: 6.6918
+Epoch89: Average ASSD: 1.4044
+Current Best Testing Info: Best Dice Score: 0.8258, with HD95 = 12.282683593720575 and ASSD = 2.1357558052116197 at epoch 80
+Epoch [91/150], Loss: 0.8533
+Epoch [92/150], Loss: 0.8397
+Epoch [93/150], Loss: 0.8191
+Epoch [94/150], Loss: 0.8366
+Epoch [95/150], Loss: 0.8408
+Epoch [96/150], Loss: 0.8288
+Epoch [97/150], Loss: 0.8162
+Epoch [98/150], Loss: 0.8281
+Epoch [99/150], Loss: 0.8092
+Epoch [100/150], Loss: 0.8078
+Epoch99: Average Dice Score: 0.1327
+Epoch99: Average HD95: 25.2948
+Epoch99: Average ASSD: 8.0794
+Current Best Testing Info: Best Dice Score: 0.8258, with HD95 = 12.282683593720575 and ASSD = 2.1357558052116197 at epoch 80
+Epoch [101/150], Loss: 0.8190
+Epoch [102/150], Loss: 0.8068
+Epoch [103/150], Loss: 0.8043
+Epoch [104/150], Loss: 0.8181
+Epoch [105/150], Loss: 0.8241
+Epoch [106/150], Loss: 0.8009
+Epoch [107/150], Loss: 0.8021
+Epoch [108/150], Loss: 0.7973
+Epoch [109/150], Loss: 0.8180
+Epoch [110/150], Loss: 0.7985
+Epoch109: Average Dice Score: 0.7633
+Epoch109: Average HD95: 4.8141
+Epoch109: Average ASSD: 1.3468
+Current Best Testing Info: Best Dice Score: 0.8258, with HD95 = 12.282683593720575 and ASSD = 2.1357558052116197 at epoch 80
+Epoch [111/150], Loss: 0.8151
+Epoch [112/150], Loss: 0.7970
+Epoch [113/150], Loss: 0.8262
+Epoch [114/150], Loss: 0.8442
+Epoch [115/150], Loss: 0.8287
+Epoch [116/150], Loss: 0.8183
+Epoch [117/150], Loss: 0.8343
+Epoch [118/150], Loss: 0.8000
+Epoch [119/150], Loss: 0.8100
+Epoch [120/150], Loss: 0.8075
+Epoch119: Average Dice Score: 0.1612
+Epoch119: Average HD95: 24.6700
+Epoch119: Average ASSD: 7.7373
+Current Best Testing Info: Best Dice Score: 0.8258, with HD95 = 12.282683593720575 and ASSD = 2.1357558052116197 at epoch 80
+Epoch [121/150], Loss: 0.8221
+Epoch [122/150], Loss: 0.8060
+Epoch [123/150], Loss: 0.7970
+Epoch [124/150], Loss: 0.7891
+Epoch [125/150], Loss: 0.7989
+Epoch [126/150], Loss: 0.8256
+Epoch [127/150], Loss: 0.7842
+Epoch [128/150], Loss: 0.7882
+Epoch [129/150], Loss: 0.7931
+Epoch [130/150], Loss: 0.8162
+Epoch129: Average Dice Score: 0.7873
+Epoch129: Average HD95: 6.1748
+Epoch129: Average ASSD: 1.4764
+Current Best Testing Info: Best Dice Score: 0.8258, with HD95 = 12.282683593720575 and ASSD = 2.1357558052116197 at epoch 80
+Epoch [131/150], Loss: 0.7915
+Epoch [132/150], Loss: 0.7765
+Epoch [133/150], Loss: 0.7802
+Epoch [134/150], Loss: 0.7737
+Epoch [135/150], Loss: 0.7721
+Epoch [136/150], Loss: 0.7782
+Epoch [137/150], Loss: 0.7992
+Epoch [138/150], Loss: 0.7794
+Epoch [139/150], Loss: 0.7896
+Epoch [140/150], Loss: 0.7781
+Epoch139: Average Dice Score: 0.5223
+Epoch139: Average HD95: 9.2748
+Epoch139: Average ASSD: 2.0198
+Current Best Testing Info: Best Dice Score: 0.8258, with HD95 = 12.282683593720575 and ASSD = 2.1357558052116197 at epoch 80
+Epoch [141/150], Loss: 0.7792
+Epoch [142/150], Loss: 0.7674
+Epoch [143/150], Loss: 0.7808
+Epoch [144/150], Loss: 0.8580
+Epoch [145/150], Loss: 0.8125
+Epoch [146/150], Loss: 0.7935
+Epoch [147/150], Loss: 0.7802
+Epoch [148/150], Loss: 0.7619
+Epoch [149/150], Loss: 0.7661
+Epoch [150/150], Loss: 0.7793
+Epoch149: Average Dice Score: 0.8266
+Epoch149: Average HD95: 9.9811
+Epoch149: Average ASSD: 2.0641
+Current Best Testing Info: Best Dice Score: 0.8258, with HD95 = 12.282683593720575 and ASSD = 2.1357558052116197 at epoch 80
+Average Dice Score: 0.8246
+Average HD95: 9.6442
+Average ASSD: 2.1693
+Best Dice Score: 0.8266, with HD95 = 9.981091532815222 and ASSD = 2.064122464971702 at epoch 150

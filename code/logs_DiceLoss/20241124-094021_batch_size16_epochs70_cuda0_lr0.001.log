@@ -1,0 +1,104 @@
+Length of Training Data:244, Length of Testing Data:523
+start running at device: cuda:0
+Epoch [1/70], Loss: 1.4912
+Epoch [2/70], Loss: 1.4895
+Epoch [3/70], Loss: 1.4884
+Epoch [4/70], Loss: 1.4869
+Epoch [5/70], Loss: 1.4857
+Epoch [6/70], Loss: 1.4846
+Epoch [7/70], Loss: 1.4833
+Epoch [8/70], Loss: 1.4820
+Epoch [9/70], Loss: 1.4807
+Epoch [10/70], Loss: 1.4792
+Epoch9: Average Dice Score: 0.1315
+Epoch9: Average HD95: 88.4533
+Epoch9: Average ASSD: 35.5613
+Current Best Testing Info: Best Dice Score: 0.0000,                    with HD95 = 0 and                     ASSD = 0 at epoch 0
+Epoch [11/70], Loss: 1.4776
+Epoch [12/70], Loss: 1.4772
+Epoch [13/70], Loss: 1.4755
+Epoch [14/70], Loss: 1.4742
+Epoch [15/70], Loss: 1.4724
+Epoch [16/70], Loss: 1.4700
+Epoch [17/70], Loss: 1.4700
+Epoch [18/70], Loss: 1.4690
+Epoch [19/70], Loss: 1.4675
+Epoch [20/70], Loss: 1.4659
+Epoch19: Average Dice Score: 0.1435
+Epoch19: Average HD95: 87.3796
+Epoch19: Average ASSD: 34.5967
+Current Best Testing Info: Best Dice Score: 0.1315,                    with HD95 = 88.45329574574558 and                     ASSD = 35.56130646039319 at epoch 9
+Epoch [21/70], Loss: 1.4649
+Epoch [22/70], Loss: 1.4633
+Epoch [23/70], Loss: 1.4608
+Epoch [24/70], Loss: 1.4609
+Epoch [25/70], Loss: 1.4595
+Epoch [26/70], Loss: 1.4586
+Epoch [27/70], Loss: 1.4569
+Epoch [28/70], Loss: 1.4560
+Epoch [29/70], Loss: 1.4548
+Epoch [30/70], Loss: 1.4531
+Epoch29: Average Dice Score: 0.1522
+Epoch29: Average HD95: 87.0905
+Epoch29: Average ASSD: 33.8093
+Current Best Testing Info: Best Dice Score: 0.1435,                    with HD95 = 87.37957860339917 and                     ASSD = 34.596677331628214 at epoch 19
+Epoch [31/70], Loss: 1.4514
+Epoch [32/70], Loss: 1.4504
+Epoch [33/70], Loss: 1.4489
+Epoch [34/70], Loss: 1.4477
+Epoch [35/70], Loss: 1.4468
+Epoch [36/70], Loss: 1.4457
+Epoch [37/70], Loss: 1.4439
+Epoch [38/70], Loss: 1.4423
+Epoch [39/70], Loss: 1.4420
+Epoch [40/70], Loss: 1.4400
+Epoch39: Average Dice Score: 0.1622
+Epoch39: Average HD95: 85.7282
+Epoch39: Average ASSD: 32.8331
+Current Best Testing Info: Best Dice Score: 0.1522,                    with HD95 = 87.09054568817938 and                     ASSD = 33.80934216332549 at epoch 29
+Epoch [41/70], Loss: 1.4391
+Epoch [42/70], Loss: 1.4372
+Epoch [43/70], Loss: 1.4363
+Epoch [44/70], Loss: 1.4341
+Epoch [45/70], Loss: 1.4333
+Epoch [46/70], Loss: 1.4319
+Epoch [47/70], Loss: 1.4313
+Epoch [48/70], Loss: 1.4298
+Epoch [49/70], Loss: 1.4277
+Epoch [50/70], Loss: 1.4271
+Epoch49: Average Dice Score: 0.1744
+Epoch49: Average HD95: 86.0455
+Epoch49: Average ASSD: 32.2169
+Current Best Testing Info: Best Dice Score: 0.1622,                    with HD95 = 85.72824447376544 and                     ASSD = 32.83314035157129 at epoch 39
+Epoch [51/70], Loss: 1.4259
+Epoch [52/70], Loss: 1.4240
+Epoch [53/70], Loss: 1.4228
+Epoch [54/70], Loss: 1.4221
+Epoch [55/70], Loss: 1.4202
+Epoch [56/70], Loss: 1.4188
+Epoch [57/70], Loss: 1.4177
+Epoch [58/70], Loss: 1.4165
+Epoch [59/70], Loss: 1.4158
+Epoch [60/70], Loss: 1.4140
+Epoch59: Average Dice Score: 0.1879
+Epoch59: Average HD95: 84.8812
+Epoch59: Average ASSD: 30.8188
+Current Best Testing Info: Best Dice Score: 0.1744,                    with HD95 = 86.04548553857964 and                     ASSD = 32.216878395218735 at epoch 49
+Epoch [61/70], Loss: 1.4126
+Epoch [62/70], Loss: 1.4112
+Epoch [63/70], Loss: 1.4103
+Epoch [64/70], Loss: 1.4089
+Epoch [65/70], Loss: 1.4072
+Epoch [66/70], Loss: 1.4065
+Epoch [67/70], Loss: 1.4050
+Epoch [68/70], Loss: 1.4026
+Epoch [69/70], Loss: 1.4027
+Epoch [70/70], Loss: 1.4013
+Epoch69: Average Dice Score: 0.2055
+Epoch69: Average HD95: 83.0740
+Epoch69: Average ASSD: 29.2204
+Current Best Testing Info: Best Dice Score: 0.1879,                    with HD95 = 84.88121870231647 and                     ASSD = 30.818785326464678 at epoch 59
+Average Dice Score: 0.2835
+Average HD95: 78.4575
+Average ASSD: 24.1297
+Best Dice Score: 0.2835, with HD95 = 78.45745446769487 and ASSD = 24.129653865155518 at epoch 69
