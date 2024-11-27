@@ -42,11 +42,15 @@ if __name__ == '__main__':
     ])
 
     # Create datasets and dataloaders
-    train_dataset = FAZDataset(root_dir=r'E:\Datasets\FAZ\data\FAZ', mode='train', transform=transform)
-    test_dataset = FAZDataset(root_dir=r'E:\Datasets\FAZ\data\FAZ', mode='test', transform=transform)
+    train_dataset = FAZDataset(root_dir=r'/home/FedICRA/data/FAZ', mode='train', transform=transform)
+    test_dataset = FAZDataset(root_dir=r'/home/FedICRA/data/FAZ', mode='test', transform=transform)
 
-    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=True)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=32)
+    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=True, pin_memory=True, num_workers=32)
+
+    # from yaoxin_tools.template import check_bestNumWorkers
+    # numworker = check_bestNumWorkers(train_loader)
+    # exit()
 
     # Define training loop
     device = torch.device(f"cuda:{args.cuda}" if torch.cuda.is_available() else "cpu")
@@ -67,7 +71,7 @@ if __name__ == '__main__':
     logger(f'start running at device: {device}')
     # Training loop
     num_epochs = args.epochs
-    test_best = {'dice': 0, 'hd95': 0, 'assd': 0, 'epoch': 0}
+    test_best = {'dice': 0, 'hd95': 0, 'assd': 0, 'ap':0, 'epoch': 0}
     for epoch in range(num_epochs):
         model.train()
         epoch_loss = 0
@@ -76,8 +80,8 @@ if __name__ == '__main__':
 
             # Forward pass
             outputs = model(images)
-            if epoch < 100:
-                loss = criterion2(outputs, masks)  # Calculate loss using binary cross entropy
+            if epoch < 50:
+                loss = criterion1(outputs, masks)  # Calculate loss using binary cross entropy
             else:
                 loss = criterion2(outputs, masks)
             # Backward pass
@@ -94,6 +98,7 @@ if __name__ == '__main__':
             model.eval()
             with torch.no_grad():
                 dice_scores, hd95_scores, assd_scores = [], [], []
+                ap = 1e-9
                 for images, masks in test_loader:
                     images, masks = images.to(device), masks.to(device)
                     outputs = model(images)
@@ -106,20 +111,28 @@ if __name__ == '__main__':
                     dice_scores.append(dice_score)
                     hd95_scores.append(hd_res)
                     assd_scores.append(assd_res)
-            logger.flag = True
-            logger(f"Epoch{epoch}: Average Dice Score: {np.mean(dice_scores):.4f}")
-            logger(f"Epoch{epoch}: Average HD95: {np.mean(hd95_scores):.4f}")
-            logger(f"Epoch{epoch}: Average ASSD: {np.mean(assd_scores):.4f}")
-            logger(f"Current Best Testing Info: Best Dice Score: {test_best['dice']:.4f}, with HD95 = {test_best['hd95']} and ASSD = {test_best['assd']} at epoch {test_best['epoch']+1}")
-            if np.mean(dice_scores) > test_best['dice']:
+            dice_s = np.mean(dice_scores)
+            assd_s = np.mean(assd_scores)
+            hd95_s = np.mean(hd95_scores)
+            ap =  dice_s - .1 *  - .1 * assd_s
+            
+            if ap > test_best['ap']:
                 test_best['dice'] = np.mean(dice_scores)
                 test_best['hd95'] = np.mean(hd95_scores)
                 test_best['assd'] = np.mean(assd_scores)
+                test_best['ap'] = ap
                 test_best['epoch'] = epoch
                 if args.resume:
                     torch.save(model.state_dict(), f'./checkpoints/UNet_best_lr_{args.lr}_bs_{args.batch_size}_resume.pth')
                 else:
                     torch.save(model.state_dict(), f'./checkpoints/UNet_best_lr_{args.lr}_bs_{args.batch_size}.pth')
+            torch.save(model.state_dict(), f'./checkpoints/UNet_epoch{epoch}_lr_{args.lr}_bs_{args.batch_size}.pth')
+            logger.flag = True
+            logger(f"Epoch{epoch}: Average Dice Score: {dice_s:.4f}")
+            logger(f"Epoch{epoch}: Average HD95: {assd_s:.4f}")
+            logger(f"Epoch{epoch}: Average ASSD: {hd95_s:.4f}")
+            logger(f"Epoch{epoch}: Average AP: {ap}")
+            logger(f"Current Best Testing Info: Best Dice Score: {test_best['dice']:.4f}, with HD95 = {test_best['hd95']} and ASSD = {test_best['assd']} and AP = {test_best['ap']} at epoch {test_best['epoch']+1}")
     # Testing loop
     model.eval()
     dice_scores, hd95_scores, assd_scores = [], [], []
@@ -137,17 +150,23 @@ if __name__ == '__main__':
             dice_scores.append(dice_score)
             hd95_scores.append(hd_res)
             assd_scores.append(assd_res)
-        if np.mean(dice_scores) > test_best['dice']:
-            test_best['dice'] = np.mean(dice_scores)
-            test_best['hd95'] = np.mean(hd95_scores)
-            test_best['assd'] = np.mean(assd_scores)
-            test_best['epoch'] = epoch
-            if args.resume:
-                torch.save(model.state_dict(), f'./checkpoints/UNet_best_lr_{args.lr}_bs_{args.batch_size}_resume.pth')
-            else:
-                torch.save(model.state_dict(), f'./checkpoints/UNet_best_lr_{args.lr}_bs_{args.batch_size}.pth')
-
-    logger(f"Average Dice Score: {np.mean(dice_scores):.4f}")
-    logger(f"Average HD95: {np.mean(hd95_scores):.4f}")
-    logger(f"Average ASSD: {np.mean(assd_scores):.4f}")
-    logger(f"Best Dice Score: {test_best['dice']:.4f}, with HD95 = {test_best['hd95']} and ASSD = {test_best['assd']} at epoch {test_best['epoch']+1}")
+            dice_s = np.mean(dice_scores)
+            assd_s = np.mean(assd_scores)
+            hd95_s = np.mean(hd95_scores)
+            ap =  dice_s - .1 *  - .1 * assd_s
+            
+            if ap > test_best['ap']:
+                test_best['dice'] = np.mean(dice_scores)
+                test_best['hd95'] = np.mean(hd95_scores)
+                test_best['assd'] = np.mean(assd_scores)
+                test_best['ap'] = ap
+                test_best['epoch'] = epoch
+                if args.resume:
+                    torch.save(model.state_dict(), f'./checkpoints/UNet_best_lr_{args.lr}_bs_{args.batch_size}_resume.pth')
+                else:
+                    torch.save(model.state_dict(), f'./checkpoints/UNet_best_lr_{args.lr}_bs_{args.batch_size}.pth')
+        logger(f"Epoch{epoch}: Average Dice Score: {dice_s:.4f}")
+        logger(f"Epoch{epoch}: Average HD95: {assd_s:.4f}")
+        logger(f"Epoch{epoch}: Average ASSD: {hd95_s:.4f}")
+        logger(f"Epoch{epoch}: Average AP: {ap}")
+        logger(f"Current Best Testing Info: Best Dice Score: {test_best['dice']:.4f}, with HD95 = {test_best['hd95']} and ASSD = {test_best['assd']} and AP = {test_best['ap']} at epoch {test_best['epoch']+1}")
