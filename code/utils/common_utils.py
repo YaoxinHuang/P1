@@ -16,11 +16,12 @@ def set_seed(seed: int = 42):
 
 def get_config():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch_size', default=16, type=int, help='batch size of each gpu')
+    parser.add_argument('--batch_size', '--bs', default=32, type=int, help='batch size of each gpu')
     parser.add_argument('--epochs', default=25, type=int)
     parser.add_argument('--cuda', default=0, type=int, help='GPU id')
     parser.add_argument('--lr', default=1e-1, type=float, help='learning rate')
     parser.add_argument('--resume', default=0, help='resume train or not')
+    parser.add_argument('--data_dir', '--data', type=str, default='../FAZ/', help='data dir')
 
     return parser.parse_args()
 

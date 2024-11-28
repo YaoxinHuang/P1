@@ -43,9 +43,11 @@ if __name__ == '__main__':
     # Create datasets and dataloaders
     train_dataset = FAZDataset(root_dir=r'../FAZ', mode='train', transform=transform)
     test_dataset = FAZDataset(root_dir=r'../FAZ', mode='test', transform=transform)
+    train_dataset = FAZDataset(root_dir=args.data_dir, mode='train', transform=transform)
+    test_dataset = FAZDataset(root_dir=args.data_dir, mode='test', transform=transform)
 
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=16)
-    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=True, pin_memory=True, num_workers=16)
+    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False, pin_memory=True, num_workers=16)
 
     # from yaoxin_tools.template import check_bestNumWorkers
     # numworker = check_bestNumWorkers(train_loader)
