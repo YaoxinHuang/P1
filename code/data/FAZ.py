@@ -27,6 +27,7 @@ class FAZDataset(Dataset):
     def __getitem__(self, idx):
         img_path, mask_path = self.img_mask_pairs[idx]
         image = Image.open(img_path).convert('L')
+        
         mask = Image.open(mask_path).convert('L')
 
         if self.transform:
