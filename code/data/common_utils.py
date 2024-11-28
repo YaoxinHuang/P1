@@ -16,7 +16,9 @@ import os
 
 def get_image_pairs(root_dir, mode):
     img_mask_pairs = []
+    labels = []
     for domain in os.listdir(root_dir):
+        labelNum = 0
         if mode == 'train' and domain != 'Domain1':
             continue
         domain_path = os.path.join(root_dir, domain)
@@ -25,7 +27,9 @@ def get_image_pairs(root_dir, mode):
         masks_path = os.path.join(split_path, 'mask')
         for img_name in os.listdir(imgs_path):
             if img_name.endswith('.png'):
+                labelNum += 1
                 img_path = os.path.join(imgs_path, img_name)
                 mask_path = os.path.join(masks_path, img_name)
                 img_mask_pairs.append((img_path, mask_path))
-    return img_mask_pairs
+        labels.append(labelNum)
+    return img_mask_pairs, labels
