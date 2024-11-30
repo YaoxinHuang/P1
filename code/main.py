@@ -43,11 +43,11 @@ if __name__ == '__main__':
     # Create datasets and dataloaders
     train_dataset = FAZDataset(root_dir=r'../FAZ', mode='train', transform=transform)
     test_dataset = FAZDataset(root_dir=r'../FAZ', mode='test', transform=transform)
-    train_dataset = FAZDataset(root_dir=args.data_dir, mode='train', transform=transform)
-    test_dataset = FAZDataset(root_dir=args.data_dir, mode='test', transform=transform)
+    # train_dataset = FAZDataset(root_dir=args.data_dir, mode='train', transform=transform)
+    # test_dataset = FAZDataset(root_dir=args.data_dir, mode='test', transform=transform)
 
-    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=16)
-    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False, pin_memory=True, num_workers=16)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=4)
+    test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False, pin_memory=True, num_workers=4)
 
     # from yaoxin_tools.template import check_bestNumWorkers
     # numworker = check_bestNumWorkers(train_loader)
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     logger = writer_log(f'./logs/{getLocalTime()}', **vars(args))
     logger(f"Length of Training Data:{len(train_dataset)}, Length of Testing Data:{len(test_dataset)}")
     criterion1 = Loss1()  # Using binary cross entropy loss for segmentation
-    criterion2= Loss2()
+    # criterion2= Loss2()
     optimizer = optim.SGD(model.parameters(), lr=args.lr)
 
     logger(f'start running at device: {device}')
@@ -84,7 +84,7 @@ if __name__ == '__main__':
             if epoch < 50:
                 loss = criterion1(outputs, masks)  # Calculate loss using binary cross entropy
             else:
-                loss = criterion2(outputs, masks)
+                loss = criterion1(outputs, masks)
             # Backward pass
             optimizer.zero_grad()
             loss.backward()

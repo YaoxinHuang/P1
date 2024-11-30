@@ -1,2 +1,7 @@
 ./checkpoints/
 __pycache__
+./logs
+logs/
+checkpoints/
+logs/
+logs**/
