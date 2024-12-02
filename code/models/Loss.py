@@ -9,17 +9,21 @@ class TopoLoss(nn.Module):
     def __init__(self, auto_scale=True):
         super(TopoLoss, self).__init__()
         self.auto_scale = auto_scale
+
     @timeit
     def forward(self, inputs, target):
-        persistence_layer = ttnn.CubicalComplex()
-        before_persistence_diagram = persistence_layer(inputs)
-        after_persistence_diagram = persistence_layer(target)
-        distance = ttnn.WassersteinDistance()(before_persistence_diagram[0][0], after_persistence_diagram[0][0])
-        # scalar
-        if self.auto_scale:
-            while distance > 2:
-                distance = distance / 10
-        return distance
+        total_distance = 0
+        for i in range(inputs.shape[0]):
+            persistence_layer = ttnn.CubicalComplex()
+            before_persistence_diagram = persistence_layer(inputs[i])
+            after_persistence_diagram = persistence_layer(target[i])
+            distance = ttnn.WassersteinDistance()(before_persistence_diagram[0][0], after_persistence_diagram[0][0])
+            # scalar
+            # if self.auto_scale:
+            #     while distance > 2:
+            #         distance = distance / 10
+            total_distance += distance
+        return total_distance
 
 class DiceLoss(nn.Module):
     def __init__(self, smooth=1e-6):
