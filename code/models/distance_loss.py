@@ -1,5 +1,5 @@
 from torch import nn as nn
-
+from scipy.ndimage import distance_transform_edt
 import torch
 
 
@@ -31,9 +31,19 @@ class Distance_Loss(nn.Module):
         super(Distance_Loss, self).__init__()
         self.alpha = .6
         self.beta = .4
-
-        self.MSELoss = nn.MSELoss()
-        self.DiceLoss = DiceLoss()
     
     def forward(self, inputs, targets):
-        return self.alpha * self.MSELoss(inputs, targets) + self.beta * self.DiceLoss(inputs, targets)
+        weight = torch.zeros_like(targets)
+        eps = 1e-9
+        device = targets.device
+        for b in range(targets.shape[0]):
+            weight[b, ...] = torch.tensor(1 - distance_transform_edt(targets[b, ...].squeeze().cpu().numpy())).to(device)
+            weight[b, ...] = weight[b, ...] / torch.sum(weight[b, ...]) + eps
+
+        # MSE Loss
+        self.weightMSELoss = torch.mean(weight*(inputs-targets)**2)
+        
+        #Dice Loss
+        self.DiceLoss = DiceLoss()
+
+        return self.alpha * self.weightMSELoss + self.beta * self.DiceLoss(inputs, targets)

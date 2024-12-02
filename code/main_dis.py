@@ -9,7 +9,7 @@ from data.FAZ import FAZDataset
 from medpy.metric.binary import dc
 
 from models.UNet import UNet
-from models.distance_loss import Distance_Loss
+from models.Loss import Loss1, Loss2
 
 from utils.common_utils import set_seed, get_config
 from utils.evaluate import hd95, assd
@@ -65,7 +65,8 @@ if __name__ == '__main__':
     model.to(device)
     logger = writer_log(f'./logs/{getLocalTime()}', **vars(args))
     logger(f"Length of Training Data:{len(train_dataset)}, Length of Testing Data:{len(test_dataset)}")
-    criterion1 = Distance_Loss()
+    criterion1 = Loss1()  # Using binary cross entropy loss for segmentation
+    # criterion2= Loss2()
     optimizer = optim.SGD(model.parameters(), lr=args.lr)
 
     logger(f'start running at device: {device}')
@@ -80,8 +81,10 @@ if __name__ == '__main__':
 
             # Forward pass
             outputs = model(images)
-            loss = criterion1(outputs, masks)
-            
+            if epoch < 50:
+                loss = criterion1(outputs, masks)  # Calculate loss using binary cross entropy
+            else:
+                loss = criterion1(outputs, masks)
             # Backward pass
             optimizer.zero_grad()
             loss.backward()
@@ -101,7 +104,7 @@ if __name__ == '__main__':
                     images, masks = images.to(device), masks.to(device)
                     outputs = model(images)
                     outputs = torch.sigmoid(outputs)  # Apply sigmoid to convert logits to probabilities
-                    preds = (outputs < 0.8).float()  # Binarize the output
+                    preds = (outputs > 0.5).float()  # Binarize the output
 
                     preds, masks = preds.cpu().numpy(), masks.cpu().numpy()
                     # Dice coefficient calculation
@@ -140,7 +143,7 @@ if __name__ == '__main__':
             images, masks = images.to(device), masks.to(device)
             outputs = model(images)
             # outputs = torch.sigmoid(outputs)  # Apply sigmoid to convert logits to probabilities
-            preds = (outputs < 0.7).float()  # Binarize the output
+            preds = (outputs > 0.5).float()  # Binarize the output
 
             preds, masks = preds.cpu().numpy(), masks.cpu().numpy()
             # Dice coefficient calculation
