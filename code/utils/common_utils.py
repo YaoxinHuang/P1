@@ -22,7 +22,8 @@ def get_config():
     parser.add_argument('--lr', default=0.02, type=float, help='learning rate')
     parser.add_argument('--resume', default=0, help='resume train or not')
     # parser.add_argument('--data_dir', '--data', type=str, default='../FAZ/', help='data dir')
-
+    parser.add_argument('--sr', '--shift_ratio', default=0.3, type=float, help='ratio of shift domain in training')
+    
     return parser.parse_args()
 
 

@@ -35,7 +35,7 @@ def domain_shift(img, target_soruce_img, axes=(0, 1)):
     target_soruce_img_fft = np.fft.fft2(target_soruce_img, axes=axes)
     amp_local = np.abs(img_fft)
     amp_target = np.abs(target_soruce_img_fft)
-    new_amp_local = amp_spectrum_swap(amp_local, amp_target, alpha=0.5, lamda=0.5)
+    new_amp_local = amp_spectrum_swap(amp_local, amp_target, alpha=0.01, lamda=0.5)
     phase_local = np.angle(img_fft)
     img_fft = new_amp_local * np.exp(1j * phase_local)
     new_img = np.fft.ifft2(img_fft, axes=axes).real
