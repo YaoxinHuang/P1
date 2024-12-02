@@ -9,7 +9,7 @@ from data.FAZ import FAZDataset
 from medpy.metric.binary import dc
 
 from models.UNet import UNet
-from models.distance_loss import Distance_Loss as Loss1
+from models.distance_loss import Distance_Loss_copy as Loss1
 
 from utils.common_utils import set_seed, get_config
 from utils.evaluate import hd95, assd
@@ -82,20 +82,17 @@ if __name__ == '__main__':
 
             # Forward pass
             outputs = model(images)
-            loss1, loss2 = criterion1(outputs, masks)  # Calculate loss using binary cross entropy
-            loss = loss1 + loss2
+            loss = criterion1(outputs, masks)  # Calculate loss using binary cross entropy
             # Backward pass
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
 
-            epoch_loss1 += loss1.item()
-            epoch_loss2 += loss2.item()
+            epoch_loss1 += loss.item()
 
         avg_loss1 = epoch_loss1 / len(train_loader)
-        avg_loss2 = epoch_loss2 / len(train_loader)
-        logger(f"Epoch [{epoch + 1}/{num_epochs}], Loss1: {avg_loss1:.4f}")
-        logger(f"Epoch [{epoch + 1}/{num_epochs}], Loss2: {avg_loss2:.4f}")
+        logger(f"Epoch [{epoch + 1}/{num_epochs}], Loss: {avg_loss1:.4f}")
+        # logger(f"Epoch [{epoch + 1}/{num_epochs}], Loss2: {avg_loss2:.4f}")
 
         if (epoch+1) % 10 == 0:
             model.eval()
