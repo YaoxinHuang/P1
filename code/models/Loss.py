@@ -83,7 +83,7 @@ class Loss2(nn.Module):
 
 
 if __name__ == '__main__':
-    reader = usual_reader()
+    reader = usual_reader() 
     # shape = (633, 259, 352)
     # seg, _, _, _ = reader(r"D:\Work\data\label.nii.gz")
     # label, _, _, _ = reader(r"D:\Work\data\label.nii.gz")
