@@ -61,7 +61,7 @@ class Distance_Loss(nn.Module):
 class Distance_Loss_copy(nn.Module):
     def __init__(self):
         super(Distance_Loss_copy, self).__init__()
-        self.alpha = .06
+        self.alpha = 1000
         self.beta = 1
     
     def forward(self, inputs, targets):
@@ -76,9 +76,9 @@ class Distance_Loss_copy(nn.Module):
             w = v - w[b, ...]
             w = w * mask
 
-            # in torch
+            # in torch``
             weight[b, ...] = torch.tensor(w).to(device)
-            weight[b, ...] += eps
+            weight[b, ...] = weight[b, ...] / ((torch.sum(weight[b, ...])) + eps) * 10
         
         # MSE Loss
         self.weightMSELoss = torch.mean(weight*(inputs-targets)**2)

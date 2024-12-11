@@ -94,7 +94,7 @@ if __name__ == '__main__':
         logger(f"Epoch [{epoch + 1}/{num_epochs}], Loss: {avg_loss1:.4f}")
         # logger(f"Epoch [{epoch + 1}/{num_epochs}], Loss2: {avg_loss2:.4f}")
 
-        if (epoch+1) % 10 == 0:
+        if (epoch+1) % 1 == 0:
             model.eval()
             with torch.no_grad():
                 dice_scores, hd95_scores, assd_scores = [], [], []
