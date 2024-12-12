@@ -21,7 +21,7 @@ from yaoxin_tools import mapping
 
 
 class FAZDataset(Dataset):
-    def __init__(self, root_dir, mode, transform=None, domain_amp_dir=None, shift_ratio=0.3):
+    def __init__(self, root_dir, mode, transform=None, domain_amp_dir=None, shift_ratio=0.3, alpha=0.01):
         self.img_mask_pairs, self.labels = get_image_pairs(root_dir, mode)
         self.transform = transform
         self.mode = mode
@@ -32,6 +32,7 @@ class FAZDataset(Dataset):
             self.domain_amps.extend(glob.glob(f"../FAZ/Domain{i}/train/imgs/*.png"))
             # self.domain_amps.extend(glob.glob(f"D:/P1/FAZ/Domain{i}/train/imgs/*.png"))
         self.shift_ratio = shift_ratio
+        self.alpha = alpha
 
     def _get_np_img(self, img_dir):
         img = np.asarray(Image.open(img_dir).convert('L'))
@@ -46,7 +47,7 @@ class FAZDataset(Dataset):
             img = self._get_np_img(img_path)
             mask = np.where(self._get_np_img(mask_path)>0, 255, 0)
             if np.random.rand() < self.shift_ratio:
-                shift_img = np.clip(domain_shift(img, self._get_np_img(random.choice(self.domain_amps))), 0, 255)
+                shift_img = np.clip(domain_shift(img, self._get_np_img(random.choice(self.domain_amps)), axes=(0, 1), alpha=self.alpha), 0, 255)
             else:
                 shift_img = img
             if self.transform:

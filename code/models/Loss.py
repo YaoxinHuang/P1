@@ -1,6 +1,9 @@
 import torch
 import torch_topological.nn as ttnn
 
+import numpy as np
+from scipy.ndimage import distance_transform_edt
+
 from torch import nn as nn
 from yaoxin_tools import timeit, usual_reader
 
@@ -48,6 +51,37 @@ class DiceLoss(nn.Module):
         # Return Dice loss
         return 1 - dice
 
+class distanceWeighted_Loss(nn.Module):
+    def __init__(self, alpha=.6, beta=1.):
+        super(distanceWeighted_Loss, self).__init__()
+        self.alpha = alpha
+        self.beta = beta
+    
+    def forward(self, inputs, targets):
+        inputs = nn.functional.sigmoid(inputs) # to sigmoid to (0,1)
+        weight = torch.zeros_like(targets)
+        device = targets.device
+        eps = 1e-3
+        for b in range(targets.shape[0]):
+            # in numpy
+            w = distance_transform_edt(targets[b, ...].squeeze().cpu().numpy())
+            v = np.max(w)
+            mask = (w != 0)[np.newaxis, ...]
+            w = v - w[b, ...]
+            w = w * mask
+
+            # in torch
+            weight[b, ...] = torch.tensor(w).to(device)
+            weight[b, ...] += eps
+        
+        # MSE Loss
+        self.weightMSELoss = torch.mean(weight*(inputs-targets)**2)
+
+        #Dice Loss
+        self.DiceLoss = DiceLoss()
+
+        # return self.alpha * self.weightMSELoss + self.beta * self.DiceLoss(inputs, targets)
+        return self.alpha * self.weightMSELoss + self.beta * self.DiceLoss(inputs, targets)
 
 class Loss1(nn.Module):
     def __init__(self) -> None:
@@ -60,7 +94,6 @@ class Loss1(nn.Module):
     def forward(self, inputs, targets):
         return self.alpha * self.BCELoss(inputs, targets) + \
                 self.beta * self.DiceLoss(inputs, targets)
-
 
 class Loss2(nn.Module):
     def __init__(self):
@@ -81,6 +114,16 @@ class Loss2(nn.Module):
                 self.beta * self.DiceLoss(inputs, targets) + \
                 self.gamma * self.TopoLoss(inputs, targets)
 
+class Loss(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.alpha = .5
+        self.beta = .5
+        self.diceloss = DiceLoss()
+        self.bceloss = nn.BCEWithLogitsLoss()
+    
+    def forward(self, input ,target):
+        return self.alpha * self.diceloss(input, target) + self.beta * self.bceloss(input, target)
 
 if __name__ == '__main__':
     reader = usual_reader() 
@@ -90,5 +133,3 @@ if __name__ == '__main__':
     rand = torch.randn(1, 1, 100, 100)
     seg = reader(r'D:\data\FAZ\Domain1\test\mask\001_D_1.png', 'torch').to(torch.float32)
     label = reader(r'D:\data\FAZ\Domain1\test\mask\065_M_59.png', 'torch').to(torch.float32)
-    dis = TopoLoss()(seg, label)
-    print(dis)

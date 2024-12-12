@@ -86,5 +86,5 @@ class Distance_Loss_copy(nn.Module):
         #Dice Loss
         self.DiceLoss = DiceLoss()
 
-        return self.alpha * self.weightMSELoss
-        # return self.alpha * self.weightMSELoss, self.beta * self.DiceLoss(inputs, targets)
+        # return self.alpha * self.weightMSELoss
+        return self.alpha * self.weightMSELoss, self.beta * self.DiceLoss(inputs, targets)

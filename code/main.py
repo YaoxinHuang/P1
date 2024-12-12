@@ -41,7 +41,7 @@ if __name__ == '__main__':
     ])
 
     # Create datasets and dataloaders
-    train_dataset = FAZDataset(root_dir=r'../FAZ', mode='train', transform=transform)
+    train_dataset = FAZDataset(root_dir=r'../FAZ', mode='train', transform=transform, alpha=args.alpha)
     test_dataset = FAZDataset(root_dir=r'../FAZ', mode='test', transform=transform)
     # train_dataset = FAZDataset(root_dir=args.data_dir, mode='train', transform=transform)
     # test_dataset = FAZDataset(root_dir=args.data_dir, mode='test', transform=transform)

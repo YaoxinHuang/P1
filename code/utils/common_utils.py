@@ -23,6 +23,7 @@ def get_config():
     parser.add_argument('--resume', default=0, help='resume train or not')
     # parser.add_argument('--data_dir', '--data', type=str, default='../FAZ/', help='data dir')
     parser.add_argument('--sr', '--shift_ratio', default=0.5, type=float, help='ratio of shift domain in training')
+    parser.add_argument('--alpha', default=0.01, type=float, help='ratio of cut the center of spectrum')
     
     return parser.parse_args()
 
